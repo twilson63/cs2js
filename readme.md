@@ -1,11 +1,11 @@
 # js2cs
 
-Convert your JavaScript to CoffeeScript
+Convert your CoffeeScript to JavaScript  
 
 [![build
-status](https://secure.travis-ci.org/twilson63/js2cs.png)](http://travis-ci.org/twilson63/js2cs)
+status](https://secure.travis-ci.org/twilson63/cs2js.png)](http://travis-ci.org/twilson63/cs2js)
 
-[http://js2cs.nodejitsu.com](http://js2cs.nodejitsu.com)
+[http://cs2js.nodejitsu.com](http://cs2js.nodejitsu.com)
 
 ## Requirements
 
@@ -18,8 +18,8 @@ status](https://secure.travis-ci.org/twilson63/js2cs.png)](http://travis-ci.org/
 ## Install
 
 ``` sh
-git clone https://github.com/twilson63/js2cs.git
-cd js2cs
+git clone https://github.com/twilson63/cs2js.git
+cd cs2js
 npm install
 ```
 
@@ -53,7 +53,7 @@ see LICENSE
 everyone is welcome to contribute. patches, bugfixes, new features
 
 1. create an [issue][2] on github so the community can comment on your idea
-2. fork `js2cs` in github
+2. fork `cs2js` in github
 3. create a new branch `git checkout -b my_branch`
 4. create tests for the changes you made
 5. make sure you pass both existing and newly inserted tests
