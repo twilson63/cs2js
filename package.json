@@ -1,0 +1,31 @@
+{
+  "author": "Tom Wilson <tom@jackhq.com>",
+  "name": "cs2js",
+  "description": "Web App to convert coffeescript to javascript",
+  "version": "0.2.0",
+  "repository": {
+    "url": ""
+  },
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "server.js"
+  },
+  "engines": {
+    "node": "0.6 || 0.7 || 0.8"
+  },
+  "dependencies": {
+    "coffee-script": "*",
+    "socket.io": "*",
+    "filed": "0.0.6"
+  },
+  "devDependencies": {
+    "coffeecup": "*",
+    "mocha": "*",
+    "should": "*",
+    "request": "*",
+    "jsdom": "*"
+  },
+  "optionalDependencies": {},
+  "subdomain": "cs2js"
+}
