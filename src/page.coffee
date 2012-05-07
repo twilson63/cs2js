@@ -6,6 +6,7 @@ module.exports = ->
       meta name: 'description', content: 'Convert CoffeeScript 2 Javascript'
       meta name: 'keywords', content: 'coffeescript, javascript, convert coffeescript to javascript'
       meta name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1'
+      link href: 'http://fonts.googleapis.com/css?family=Orbitron', rel: 'stylesheet', type: 'text/css'
       link rel: 'stylesheet', href: '/stylesheets/base.css'
       link rel: 'stylesheet', href: '/stylesheets/skeleton.css'
       link rel: 'stylesheet', href: '/stylesheets/layout.css'
@@ -29,7 +30,7 @@ module.exports = ->
       div '.container', ->
         div '.row', style: 'margin-top: 25px;', ->
           div '.twelve.columns', ->
-            h3 style: 'float: right;margin-right: 20px;color: rgba(0,0,0,.7);', 'Javascript to Coffeescript'
+            h3 style: 'float: right;margin-right: 20px;color: rgba(0,0,0,.7);', 'Coffeescript to Javascript'
             h1 'js2cs'
             small 'Convert your CoffeeScript to JavaScript'
         form method: 'POST', action: '/convert', ->

@@ -17,6 +17,11 @@ module.exports = function() {
         content: 'width=device-width, initial-scale=1, maximum-scale=1'
       });
       link({
+        href: 'http://fonts.googleapis.com/css?family=Orbitron',
+        rel: 'stylesheet',
+        type: 'text/css'
+      });
+      link({
         rel: 'stylesheet',
         href: '/stylesheets/base.css'
       });
@@ -62,7 +67,7 @@ module.exports = function() {
           return div('.twelve.columns', function() {
             h3({
               style: 'float: right;margin-right: 20px;color: rgba(0,0,0,.7);'
-            }, 'Javascript to Coffeescript');
+            }, 'Coffeescript to Javascript');
             h1('js2cs');
             return small('Convert your CoffeeScript to JavaScript');
           });
