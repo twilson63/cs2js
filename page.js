@@ -36,40 +36,14 @@ module.exports = function() {
       return comment('[if lt IE 9]>\r\n\t<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>\r\n<![endif]');
     });
     return body(function() {
-      script({
-        src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js'
-      });
-      script({
-        src: '/socket.io/socket.io.js'
-      });
-      coffeescript(function() {
-        return $(function() {
-          var socket;
-          socket = io.connect();
-          socket.on('result', function(cs) {
-            $('textarea[name=javascript]').text(cs);
-            return $('#results').show();
-          });
-          $('form').submit(function(e) {
-            e.preventDefault();
-            socket.emit('convert', $('textarea[name=coffeescript]', this).val());
-            return false;
-          });
-          return $('form a').click(function(e) {
-            return $('textarea').val('');
-          });
-        });
-      });
-      return div('.container', function() {
+      div('.container', function() {
         div('.row', {
           style: 'margin-top: 25px;'
         }, function() {
           return div('.twelve.columns', function() {
-            h3({
-              style: 'float: right;margin-right: 20px;color: rgba(0,0,0,.7);'
+            return h3('.fit', {
+              style: 'color: rgba(0,0,0,.7);'
             }, 'Coffeescript to Javascript');
-            h1('js2cs');
-            return small('Convert your CoffeeScript to JavaScript');
           });
         });
         form({
@@ -80,7 +54,7 @@ module.exports = function() {
             return div('.twelve.columns', function() {
               return textarea({
                 name: 'coffeescript',
-                placeholder: '< insert your javascript here >',
+                placeholder: 'square = (x) -> x * x',
                 style: 'height:150px;width:98%'
               }, function() {
                 return this.js;
@@ -89,14 +63,15 @@ module.exports = function() {
           });
           div('.row', function() {
             div('.six.columns', function() {
-              return button({
-                style: 'width: 100%'
+              return a('.button', {
+                href: '#',
+                style: 'width:90%;'
               }, 'CONVERT');
             });
             return div('.six.columns', function() {
               return a('.button', {
                 href: '#',
-                style: 'width: 90%;text-align: center;margin: 2.5px;'
+                style: 'width: 90%'
               }, 'RESET');
             });
           });
@@ -106,12 +81,18 @@ module.exports = function() {
             return div('.twelve.columns', function() {
               return textarea({
                 name: 'javascript',
-                placeholder: '< press [convert] and see your coffeescript >',
                 style: 'height:150px;width:98%'
               }, function() {
                 return this.coffee;
               });
             });
+          });
+        });
+        div('.row', function() {
+          return div('.twelve.columns', function() {
+            return h3('.fit', {
+              style: 'color: rgba(0,0,0,.7);'
+            }, 'News and Updates');
           });
         });
         return div('.row', {
@@ -139,8 +120,39 @@ module.exports = function() {
             a('.twitter-follow-button', {
               href: 'https://twitter.com/twilson63',
               'data-show-count': 'false'
-            }, 'Follow @twilson63');
+            }, 'Follow');
             return script('!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");');
+          });
+        });
+      });
+      script({
+        src: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js'
+      });
+      script({
+        src: '/javascripts/fittext.js'
+      });
+      script({
+        src: '/socket.io/socket.io.js'
+      });
+      return coffeescript(function() {
+        return $(function() {
+          var socket;
+          socket = io.connect();
+          socket.on('result', function(cs) {
+            $('textarea[name=javascript]').text(cs);
+            return $('#results').show();
+          });
+          $('.fit').fitText(1.2, {
+            minFontSize: '13px',
+            maxFontSize: '40px'
+          });
+          $('form').submit(function(e) {
+            e.preventDefault();
+            socket.emit('convert', $('textarea[name=coffeescript]', this).val());
+            return false;
+          });
+          return $('form a').click(function(e) {
+            return $('textarea').val('');
           });
         });
       });
