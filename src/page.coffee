@@ -22,7 +22,7 @@ module.exports = ->
               textarea name: 'coffeescript', placeholder: 'square = (x) -> x * x', style: 'height:150px;width:98%', -> @js
           div '.row', ->
             div '.six.columns', ->
-              a '.button', href: '#', style: 'width:90%;', 'CONVERT'
+              a '#convert.button', href: '#', style: 'width:90%;', 'CONVERT'
               #button style: 'width: 100%', 'CONVERT'
             div '.six.columns', ->
               a '.button', href: '#', style: 'width: 90%', 'RESET'
@@ -47,14 +47,17 @@ module.exports = ->
       coffeescript ->
         $ ->
           socket = io.connect()
-          socket.on 'result', (cs) ->
-            $('textarea[name=javascript]').text cs
+          socket.on 'result', (js) ->
+            $('textarea[name=javascript]').val js
             $('#results').show()
           $('.fit').fitText(1.2, { minFontSize: '13px', maxFontSize: '40px' })
-          $('form').submit (e) ->
-            e.preventDefault()
-            socket.emit 'convert', $('textarea[name=coffeescript]',this).val()
+          $('#convert').click ->
+            socket.emit 'convert', $('textarea[name=coffeescript]').val()
             false
+          # $('form').submit (e) ->
+          #   e.preventDefault()
+          #   socket.emit 'convert', $('textarea[name=coffeescript]',this).val()
+          #   false
           $('form a').click (e) ->
             $('textarea').val('')
 

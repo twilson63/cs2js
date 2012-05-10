@@ -63,7 +63,7 @@ module.exports = function() {
           });
           div('.row', function() {
             div('.six.columns', function() {
-              return a('.button', {
+              return a('#convert.button', {
                 href: '#',
                 style: 'width:90%;'
               }, 'CONVERT');
@@ -138,17 +138,17 @@ module.exports = function() {
         return $(function() {
           var socket;
           socket = io.connect();
-          socket.on('result', function(cs) {
-            $('textarea[name=javascript]').text(cs);
+          socket.on('result', function(js) {
+            console.log(js);
+            $('textarea[name=javascript]').text(js);
             return $('#results').show();
           });
           $('.fit').fitText(1.2, {
             minFontSize: '13px',
             maxFontSize: '40px'
           });
-          $('form').submit(function(e) {
-            e.preventDefault();
-            socket.emit('convert', $('textarea[name=coffeescript]', this).val());
+          $('#convert').click(function() {
+            socket.emit('convert', $('textarea[name=coffeescript]').val());
             return false;
           });
           return $('form a').click(function(e) {
