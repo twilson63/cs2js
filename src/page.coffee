@@ -10,28 +10,25 @@ module.exports = ->
       link rel: 'stylesheet', href: '/stylesheets/base.css'
       link rel: 'stylesheet', href: '/stylesheets/skeleton.css'
       link rel: 'stylesheet', href: '/stylesheets/layout.css'
+      link rel: 'stylesheet', href: '/stylesheets/app.css'
       comment '[if lt IE 9]>\r\n\t<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>\r\n<![endif]'
     body ->
       div '.container', ->
         div '.row', style: 'margin-top: 25px;', ->
           div '.twelve.columns', ->
-            h3 '.fit', style: 'color: rgba(0,0,0,.7);', 'Coffeescript to Javascript'
-        form method: 'POST', action: '/convert', ->
+            h3 '.fit', 'Coffeescript to Javascript'
+        form ->
           div '.row', ->
             div '.twelve.columns', ->
-              textarea name: 'coffeescript', placeholder: 'square = (x) -> x * x', style: 'height:150px;width:98%', -> @js
+              textarea name: 'coffeescript', placeholder: 'square = (x) -> x * x'
           div '.row', ->
-            div '.six.columns', ->
-              a '#convert.button', href: '#', style: 'width:90%;', 'CONVERT'
-              #button style: 'width: 100%', 'CONVERT'
-            div '.six.columns', ->
-              a '.button', href: '#', style: 'width: 90%', 'RESET'
-          div '#results.row', style: 'display:none;', ->
-            div '.twelve.columns', ->
-              textarea name: 'javascript', style: 'height:150px;width:98%', -> @coffee
+            div '.six.columns', -> a '#convert.button', href: '#', 'CONVERT'
+            div '.six.columns', -> a '#reset.button', href: '#', 'RESET'
+          div '#results.row', ->
+            div '.twelve.columns', -> textarea name: 'javascript'
         div '.row', ->
           div '.twelve.columns', ->
-            h3 '.fit', style: 'color: rgba(0,0,0,.7);', 'News and Updates'
+            h3 '.fit', 'News and Updates'
         div '.row', style: 'margin-bottom: 100px;', ->
           div '.four.columns', ->
             iframe src: 'http://markdotto.github.com/github-buttons/github-btn.html?user=twilson63&repo=cs2js&type=watch', allowtransparency: true, frameborder: "0", scrolling: "0", width: "62px", height: "20px;"
@@ -47,17 +44,8 @@ module.exports = ->
       coffeescript ->
         $ ->
           socket = io.connect()
-          socket.on 'result', (js) ->
-            $('textarea[name=javascript]').val js
-            $('#results').show()
+          socket.on 'result', (js) -> $('textarea[name=javascript]').val(js); $('#results').show()
           $('.fit').fitText(1.2, { minFontSize: '13px', maxFontSize: '40px' })
-          $('#convert').click ->
-            socket.emit 'convert', $('textarea[name=coffeescript]').val()
-            false
-          # $('form').submit (e) ->
-          #   e.preventDefault()
-          #   socket.emit 'convert', $('textarea[name=coffeescript]',this).val()
-          #   false
-          $('form a').click (e) ->
-            $('textarea').val('')
+          $('#convert').click -> socket.emit 'convert', $('textarea[name=coffeescript]').val()
+          $('#reset').click -> $('textarea').val(''); $('#results').hide()
 

@@ -33,6 +33,10 @@ module.exports = function() {
         rel: 'stylesheet',
         href: '/stylesheets/layout.css'
       });
+      link({
+        rel: 'stylesheet',
+        href: '/stylesheets/app.css'
+      });
       return comment('[if lt IE 9]>\r\n\t<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>\r\n<![endif]');
     });
     return body(function() {
@@ -41,58 +45,41 @@ module.exports = function() {
           style: 'margin-top: 25px;'
         }, function() {
           return div('.twelve.columns', function() {
-            return h3('.fit', {
-              style: 'color: rgba(0,0,0,.7);'
-            }, 'Coffeescript to Javascript');
+            return h3('.fit', 'Coffeescript to Javascript');
           });
         });
-        form({
-          method: 'POST',
-          action: '/convert'
-        }, function() {
+        form(function() {
           div('.row', function() {
             return div('.twelve.columns', function() {
               return textarea({
                 name: 'coffeescript',
-                placeholder: 'square = (x) -> x * x',
-                style: 'height:150px;width:98%'
-              }, function() {
-                return this.js;
+                placeholder: 'square = (x) -> x * x'
               });
             });
           });
           div('.row', function() {
             div('.six.columns', function() {
               return a('#convert.button', {
-                href: '#',
-                style: 'width:90%;'
+                href: '#'
               }, 'CONVERT');
             });
             return div('.six.columns', function() {
-              return a('.button', {
-                href: '#',
-                style: 'width: 90%'
+              return a('#reset.button', {
+                href: '#'
               }, 'RESET');
             });
           });
-          return div('#results.row', {
-            style: 'display:none;'
-          }, function() {
+          return div('#results.row', function() {
             return div('.twelve.columns', function() {
               return textarea({
-                name: 'javascript',
-                style: 'height:150px;width:98%'
-              }, function() {
-                return this.coffee;
+                name: 'javascript'
               });
             });
           });
         });
         div('.row', function() {
           return div('.twelve.columns', function() {
-            return h3('.fit', {
-              style: 'color: rgba(0,0,0,.7);'
-            }, 'News and Updates');
+            return h3('.fit', 'News and Updates');
           });
         });
         return div('.row', {
@@ -139,8 +126,7 @@ module.exports = function() {
           var socket;
           socket = io.connect();
           socket.on('result', function(js) {
-            console.log(js);
-            $('textarea[name=javascript]').text(js);
+            $('textarea[name=javascript]').val(js);
             return $('#results').show();
           });
           $('.fit').fitText(1.2, {
@@ -148,11 +134,11 @@ module.exports = function() {
             maxFontSize: '40px'
           });
           $('#convert').click(function() {
-            socket.emit('convert', $('textarea[name=coffeescript]').val());
-            return false;
+            return socket.emit('convert', $('textarea[name=coffeescript]').val());
           });
-          return $('form a').click(function(e) {
-            return $('textarea').val('');
+          return $('#reset').click(function() {
+            $('textarea').val('');
+            return $('#results').hide();
           });
         });
       });
