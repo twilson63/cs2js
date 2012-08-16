@@ -2,7 +2,7 @@
   "author": "Tom Wilson <tom@jackhq.com>",
   "name": "cs2js",
   "description": "Web App to convert coffeescript to javascript",
-  "version": "0.2.3",
+  "version": "0.2.3-2",
   "repository": {
     "url": ""
   },
