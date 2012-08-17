@@ -23,4 +23,4 @@ io.sockets.on 'connection', (socket) ->
     finally
       socket.emit 'result', js
 
-server.listen 3000
+server.listen 7040
