@@ -1,0 +1,8 @@
+{
+  "remote": {
+    "default": {
+      "hub": "api.beautifulnode.com:7000",
+      "secret": "foo"
+    }
+  }
+}
